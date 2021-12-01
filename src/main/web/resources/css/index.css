@@ -1,0 +1,32 @@
+body {
+    font-family: "Orbitron", "Jx TabeDemo", sans-serif;
+    color: #ab1818;
+    text-align: center;
+    background-color: #171717;
+}
+
+input[type="button"] {
+    margin: 4px;
+    border: none;
+
+    background-color: #171717;
+    color: #ab1818;
+
+    font-family: inherit;
+    font-size: 20px;
+}
+
+input[type="button"]:hover{
+    color: #282828;
+    transition: color .5s;
+    cursor: pointer;
+}
+
+#clocks{
+    font-family: inherit;
+    font-size: 22px;
+    text-align: center;
+    margin: 4px;
+    color: white;
+    text-shadow: 0 0 10px red,0 0 20px red,0 0 30px red,0 0 40px red;
+}

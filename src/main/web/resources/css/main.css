@@ -1,0 +1,86 @@
+body {
+    font-family: "Orbitron", "Jx TabeDemo", sans-serif;
+    font-size: 20px;
+    color: #ab1818;
+    background-color: #171717;
+    text-align: center;
+}
+
+div.data{
+    width: 30%;
+    float: left;
+}
+
+div.table {
+    width: 50%;
+    float: right;
+}
+
+div.graph{
+    width: 20%;
+    margin: 0;
+}
+
+table.selectTable {
+    margin: auto;
+}
+
+canvas {
+    margin: auto;
+}
+
+div#dataform\:slider{
+    width: 30%;
+    margin: 5px auto;
+}
+
+a, input[type="submit"] {
+    margin-bottom: 4px;
+    border: none;
+
+    background-color: #171717;
+    color: #ab1818;
+
+    font-family: inherit;
+    font-size: 20px;
+}
+
+a:hover, input[type="submit"]:hover{
+    color: #282828;
+    transition: color .5s;
+    cursor: pointer;
+}
+
+a {
+    margin-top: 5px;
+}
+
+input[type="text"]{
+    margin: 5px;
+    background-color: #404040;
+    font-family: "Orbitron", sans-serif;
+    color: #ab1818;
+}
+
+#errorMes {
+    color: red;
+}
+
+.styledTable {
+    width: 100%;
+    margin: 0 4px 4px 0;
+    border-collapse: separate;
+}
+
+.answer {
+    font-family: inherit;
+    font-size: 22px;
+    text-align: center;
+    margin: 4px;
+    color: white;
+    text-shadow: 0 0 10px red,0 0 20px red,0 0 30px red,0 0 40px red;
+}
+
+.hiddenForm {
+    display: none;
+}

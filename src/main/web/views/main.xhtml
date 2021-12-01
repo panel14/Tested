@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: verzz
+  Date: 29.11.2021
+  Time: 15:55
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>WL3</title>
+    <h:outputScript library="js" name="main.js" target="body"/>
+    <h:outputStylesheet library="css" name="main.css"/>
+</h:head>
+
+<h:body onload="init()">
+    <div class="data">
+        <span>Введите данные:</span>
+        <h:form id="dataform">
+            X:
+            <h:selectManyCheckbox value="#{dataBean.selectedX}" styleClass="selectTable">
+                <f:selectItem itemValue="-5" itemLabel="-5"/>
+                <f:selectItem itemValue="-4" itemLabel="-4"/>
+                <f:selectItem itemValue="-3" itemLabel="-3"/>
+                <f:selectItem itemValue="-2" itemLabel="-2"/>
+                <f:selectItem itemValue="-1" itemLabel="-1"/>
+                <f:selectItem itemValue="0" itemLabel="0"/>
+                <f:selectItem itemValue="1" itemLabel="1"/>
+            </h:selectManyCheckbox>
+            <br/>
+            Y:
+            <h:inputText id="yInput" label="Y value" maxlength="5" value="#{dataBean.curPoint.y}"
+                         validatorMessage="Y должен попадать в диапазон (-5; 5)">
+                <f:validateDoubleRange minimum="-5.0" maximum="5.0" />
+            </h:inputText><br/>
+            R:
+            <h:inputText value="#{dataBean.curPoint.r}" id="rtxt" readonly="#{facesContext.renderResponse}"/>
+            <p:slider id="slider" for="rtxt" minValue="1" maxValue="4" step="0.25" style="width: 200px">
+                <p:ajax event="slideEnd" listener="#{sliderBean.onSlideEnd}"/>
+            </p:slider>
+            <br/>
+            <h:messages id="errorMes"/>
+            <h:commandButton id="sender" value="Submit" type="submit" action="#{dataBean.tryAddPoint}">
+                <f:ajax execute="dataform" render="resData" onevent="prosData"/>
+            </h:commandButton><br/>
+        </h:form>
+    </div><br/>
+    <div class="table">
+        <h:dataTable id="resData" value="#{dataBean.points}" var="mpoint" styleClass="styledTable">
+            <h:column>
+                <f:facet name="header">X</f:facet>
+                <h:outputText value="#{mpoint.x}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Y</f:facet>
+                <h:outputText value="#{mpoint.y}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">R</f:facet>
+                <h:outputText value="#{mpoint.r}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Текущее время</f:facet>
+                <h:outputText value="#{mpoint.now}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Время обработки, мс</f:facet>
+                <h:outputText value="#{mpoint.workTime}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Попадание</f:facet>
+                <h:outputText value="#{mpoint.answer}" styleClass="answer"/>
+            </h:column>
+        </h:dataTable>
+    </div><br/>
+    <div class="graph">
+        <canvas id="paint" width="400px" height="400px"></canvas>
+    </div><br/>
+    <h:form id="hiddenForm">
+        <h:inputHidden id="hiddenX" value="#{dataBean.curPoint.x}"/>
+        <h:inputHidden id="hiddenY" value="#{dataBean.curPoint.y}"/>
+        <h:inputHidden id="hiddenR" value="#{dataBean.curPoint.r}"/>
+        <h:commandButton id="hButton" action="#{dataBean.tryAddPoint}">
+            <f:ajax execute="hiddenForm" render="resData" onevent="prosData"/>
+        </h:commandButton>
+    </h:form>
+    <h:form>
+        <h:link value="Go to the start page" outcome="goStart"/>
+    </h:form>
+</h:body>
+
+</html>
