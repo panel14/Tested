@@ -33,6 +33,18 @@
             <artifactId>primefaces</artifactId>
             <version>11.0.0-RC2</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.24</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>3.1.0-M1</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -1,5 +1,6 @@
 package app.bean;
 
+import app.connection.DBConnecter;
 import app.pointClass.Point;
 
 import javax.faces.bean.ApplicationScoped;
@@ -48,8 +49,14 @@ public class DataBean implements Serializable {
 
         points.add(curPoint);
 
+        addToDB();
+
         curPoint = new Point();
         selectedX.clear();
+    }
+
+    private void addToDB(){
+        DBConnecter.addToDB(curPoint);
     }
 
     public List<String> getSelectedX() {
