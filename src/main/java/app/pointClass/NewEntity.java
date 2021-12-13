@@ -1,35 +1,36 @@
 package app.pointClass;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 
 @Table(name = "for_points")
 @Entity
-public class Point implements Serializable {
+public class NewEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int id;
+    private Integer id;
 
-    @Column(name = "x")
+    @javax.persistence.Column(name = "x")
     private double x;
 
-    @Column(name = "y")
+    @javax.persistence.Column(name = "y")
     private double y;
 
-    @Column(name = "r")
+    @javax.persistence.Column(name = "r")
     private double r;
 
-    @Column(name = "now")
+    @javax.persistence.Column(name = "now")
     private String now;
 
-    @Column(name = "answer")
+    @javax.persistence.Column(name = "answer")
     private String answer;
 
-    @Column(name = "worktime")
+    @javax.persistence.Column(name = "worktime")
     private long workTime;
 
-    public Point(){}
+    public NewEntity(){};
 
     public double getX() {
         return x;
@@ -120,12 +121,11 @@ public class Point implements Serializable {
         this.workTime = workTime;
     }
 
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }

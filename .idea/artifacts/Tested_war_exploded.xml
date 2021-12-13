@@ -13,6 +13,7 @@
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="Tested" />
+          <element id="jpa-descriptors" facet="Tested/jpa/JPA" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: javax:javaee-api:7.0" />

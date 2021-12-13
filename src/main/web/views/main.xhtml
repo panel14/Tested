@@ -36,12 +36,12 @@
             </h:selectManyCheckbox>
             <br/>
             Y:
-            <h:inputText id="yInput" label="Y value" maxlength="5" value="#{dataBean.curPoint.y}"
+            <h:inputText id="yInput" label="Y value" maxlength="5" value="#{dataBean.entity.y}"
                          validatorMessage="Y должен попадать в диапазон (-5; 5)">
                 <f:validateDoubleRange minimum="-5.0" maximum="5.0" />
             </h:inputText><br/>
             R:
-            <h:inputText value="#{dataBean.curPoint.r}" id="rtxt" readonly="#{facesContext.renderResponse}"/>
+            <h:inputText value="#{dataBean.entity.r}" id="rtxt" readonly="#{facesContext.renderResponse}"/>
             <p:slider id="slider" for="rtxt" minValue="1" maxValue="4" step="0.25" style="width: 200px">
                 <p:ajax event="slideEnd" listener="#{sliderBean.onSlideEnd}"/>
             </p:slider>
@@ -84,9 +84,9 @@
         <canvas id="paint" width="400px" height="400px"></canvas>
     </div><br/>
     <h:form id="hiddenForm">
-        <h:inputHidden id="hiddenX" value="#{dataBean.curPoint.x}"/>
-        <h:inputHidden id="hiddenY" value="#{dataBean.curPoint.y}"/>
-        <h:inputHidden id="hiddenR" value="#{dataBean.curPoint.r}"/>
+        <h:inputHidden id="hiddenX" value="#{dataBean.entity.x}"/>
+        <h:inputHidden id="hiddenY" value="#{dataBean.entity.y}"/>
+        <h:inputHidden id="hiddenR" value="#{dataBean.entity.r}"/>
         <h:commandButton id="hButton" action="#{dataBean.tryAddPoint}">
             <f:ajax execute="hiddenForm" render="resData" onevent="prosData"/>
         </h:commandButton>
