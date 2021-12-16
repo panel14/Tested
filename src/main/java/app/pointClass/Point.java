@@ -1,35 +1,30 @@
 package app.pointClass;
 
 import javax.persistence.*;
+
 import java.io.Serializable;
 
-@Table(name = "for_points")
+@Table(name = "points", schema = "s312434")
 @Entity
 public class Point implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private int id;
-
     @Column(name = "x")
     private double x;
-
     @Column(name = "y")
     private double y;
-
     @Column(name = "r")
     private double r;
-
     @Column(name = "now")
     private String now;
-
     @Column(name = "answer")
     private String answer;
-
     @Column(name = "worktime")
     private long workTime;
 
-    public Point(){}
+    public Point(){};
 
     public double getX() {
         return x;
@@ -58,24 +53,20 @@ public class Point implements Serializable {
     private boolean pointCheck() {
         int quarter = getQuarter();
         switch (quarter){
-            case 0 -> {
-                return true;
-            }
-            case 1 -> {
+            case 0: return true;
+            case 1:
                 if (y <= -2 * x + r)
                     return true;
-            }
-            case 2 ->{
+                break;
+            case 2:
                 if (Math.pow(x, 2) + Math.pow(y, 2) <= Math.pow(r/2, 2))
                     return true;
-            }
-            case 3 -> {
+                break;
+            case 3:
                 if (Math.abs(x) <= r && Math.abs(y) <= r)
                     return true;
-            }
-            case 4 -> {
-                return false;
-            }
+                break;
+            case 4: return false;
         }
         return false;
     }
@@ -120,12 +111,11 @@ public class Point implements Serializable {
         this.workTime = workTime;
     }
 
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }

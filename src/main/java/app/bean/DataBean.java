@@ -1,13 +1,12 @@
 package app.bean;
 
-import app.connection.DBConnecter;
-import app.pointClass.NewEntity;
+import app.connection.HibernateSessionFactory;
 import app.pointClass.Point;
 import lombok.Data;
+import org.hibernate.Session;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,51 +16,32 @@ import java.util.List;
 @ApplicationScoped
 @Data
 public class DataBean implements Serializable {
-    //private Point curPoint = new Point();
 
-    public NewEntity getEntity() {
+    public Point getEntity() {
         return entity;
     }
 
-    public void setEntity(NewEntity entity) {
+    public void setEntity(Point entity) {
         this.entity = entity;
     }
 
-    private NewEntity entity = new NewEntity();
+    private Point entity = new Point();
 
-    public ArrayList<NewEntity> getPoints() {
-        return points;
-    }
-
-    public void setPoints(ArrayList<NewEntity> points) {
-        this.points = points;
-    }
-
-    //private ArrayList<Point> points = new ArrayList<>();
-    private ArrayList<NewEntity> points = new ArrayList<>();
-    private List<String> selectedX;
-
-    @ManagedProperty("#{dBConnecter}")
-    DBConnecter dbConnecter;
-
-
-    public DataBean(){}
-
-/*    public ArrayList<Point> getPoints() {
+    public ArrayList<Point> getPoints() {
         return points;
     }
 
     public void setPoints(ArrayList<Point> points) {
         this.points = points;
-    }*/
-
-/*    public Point getCurPoint() {
-        return curPoint;
     }
 
-    public void setCurPoint(Point point) {
-        this.curPoint = point;
-    }*/
+    private ArrayList<Point> points = new ArrayList<>();
+    private List<String> selectedX;
+
+    Session session;
+
+
+    public DataBean(){}
 
     public void tryAddPoint(){
         long start = System.currentTimeMillis();
@@ -79,12 +59,18 @@ public class DataBean implements Serializable {
 
         addToDB();
 
-        entity = new NewEntity();
+        entity = new Point();
         selectedX.clear();
     }
 
     private void addToDB(){
-        dbConnecter.addToDB(entity);
+        session = HibernateSessionFactory.getSessionFactory().openSession();
+
+        session.beginTransaction();
+
+        session.save(entity);
+        session.getTransaction().commit();
+        session.close();
     }
 
     public List<String> getSelectedX() {
